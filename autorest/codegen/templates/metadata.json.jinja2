@@ -49,19 +49,21 @@
         {% endfor %}
     },
     "operation_mixins": {
-        {% for operation in mixin_operations %}
-        {{ operation.name | tojson }} : {
-            "doc": {{ op_tools.operation_docstring(operation) | tojson }},
-            {% set sync_operation_name = "begin_" + operation.name if is_lro(operation) else operation.name %}
-            {% set return_type_wrapper = "LROPoller" if is_lro(operation) else ("ItemPaged" if is_paging(operation) else "") %}
-            "sync_signature": {{ op_tools.method_signature(operation, sync_operation_name, False, False, return_type_wrapper) | tojson }},
-            {% set coroutine = False if is_paging(operation) else True %}
-            "async_signature": {{ op_tools.method_signature(operation, operation.name, True, coroutine) | tojson }},
-            "coroutine": {{ coroutine | tojson }},
-            "call": {{ operation.parameters.method | map(attribute="serialized_name") | join(', ') | tojson }}
-        }{{ "," if not loop.last else "" }}
-        {% endfor %}
-    },
-    "sync_imports": {{ str(sync_parameter_imports) | tojson }},
-    "async_imports": {{ str(async_parameter_imports) | tojson }}
+        "sync_imports": {{ str(sync_parameter_imports) | tojson }},
+        "async_imports": {{ str(async_parameter_imports) | tojson }},
+        "operations": {
+            {% for operation in mixin_operations %}
+            {{ operation.name | tojson }} : {
+                "doc": {{ op_tools.operation_docstring(operation) | tojson }},
+                {% set sync_operation_name = "begin_" + operation.name if is_lro(operation) else operation.name %}
+                {% set return_type_wrapper = "LROPoller" if is_lro(operation) else ("ItemPaged" if is_paging(operation) else "") %}
+                "sync_signature": {{ op_tools.method_signature(operation, sync_operation_name, False, False, return_type_wrapper) | tojson }},
+                {% set coroutine = False if is_paging(operation) else True %}
+                "async_signature": {{ op_tools.method_signature(operation, operation.name, True, coroutine) | tojson }},
+                "coroutine": {{ coroutine | tojson }},
+                "call": {{ operation.parameters.method | map(attribute="serialized_name") | join(', ') | tojson }}
+            }{{ "," if not loop.last else "" }}
+            {% endfor %}
+        }
+    }
 }

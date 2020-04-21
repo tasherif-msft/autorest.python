@@ -99,7 +99,7 @@ def _build_last_rt_list(
     versioned_dict.update(
         {
             operation_name: operation_metadata["available_apis"]
-            for operation_name, operation_metadata in mixin_operations.items()
+            for operation_name, operation_metadata in mixin_operations["operations"].items()
         }
     )
     for operation, api_versions_list in versioned_dict.items():
@@ -164,17 +164,21 @@ class MultiAPI:
             metadata_json = json.loads(self._autorestapi.read_file(version_path / "_metadata.json"))
             if not metadata_json.get('operation_mixins'):
                 continue
-            for func_name, func in metadata_json['operation_mixins'].items():
+            operation_mixins_metadata = metadata_json['operation_mixins']
+            mixin_operations["sync_imports"] = operation_mixins_metadata["sync_imports"]
+            mixin_operations["async_imports"] = operation_mixins_metadata["async_imports"]
+            for func_name, func in operation_mixins_metadata["operations"].items():
                 if func_name.startswith("_"):
                     continue
-                mixin_operations.setdefault(func_name, {}).setdefault(
+                mixin_operations.setdefault("operations", {}).setdefault(func_name, {}).setdefault(
                     "available_apis", []
                 ).append(version_path.name)
-                mixin_operations[func_name]['doc'] = func['doc']
-                mixin_operations[func_name]['sync_signature'] = func['sync_signature']
-                mixin_operations[func_name]['async_signature'] = func['async_signature']
-                mixin_operations[func_name]['coroutine'] = func['coroutine']
-                mixin_operations[func_name]['call'] = func['call']
+                mixin_operations["operations"][func_name]['doc'] = func['doc']
+                mixin_operations["operations"][func_name]['sync_signature'] = func['sync_signature']
+                mixin_operations["operations"][func_name]['async_signature'] = func['async_signature']
+                mixin_operations["operations"][func_name]['coroutine'] = func['coroutine']
+                mixin_operations["operations"][func_name]['call'] = func['call']
+
         return mixin_operations
 
     def _build_operation_meta(
@@ -312,9 +316,7 @@ class MultiAPI:
                 {last_api_version} | {versions for _, versions in last_rt_list.items()}
             ),
             "config": metadata_json["config"],
-            "global_parameters": metadata_json["global_parameters"],
-            "sync_imports": metadata_json["sync_imports"],
-            "async_imports": metadata_json["async_imports"]
+            "global_parameters": metadata_json["global_parameters"]
         }
 
         multiapi_serializer = MultiAPISerializer(
