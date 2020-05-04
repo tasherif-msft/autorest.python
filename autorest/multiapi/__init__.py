@@ -302,8 +302,16 @@ class MultiAPI:
             versioned_operations_dict, mixin_operations, last_api_version, preview_mode
         )
 
+        client_metadata = metadata_json["client"]
+        client_dict = {
+            "description": client_metadata["description"],
+            "sync_imports": client_metadata["sync_imports"],
+            "async_imports": client_metadata["async_imports"]
+        }
+
         conf = {
-            "client_name": metadata_json["client"]["name"],
+            "client": client_dict,
+            "client_name": client_metadata["name"],  # this is not in the client dict since config uses it too
             "package_name": self.output_package_name,
             "module_name": module_name,
             "operations": versioned_operations_dict,

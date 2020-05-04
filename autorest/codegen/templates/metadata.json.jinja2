@@ -5,7 +5,9 @@
     "client": {
         "name": {{ code_model.class_name | tojson }},
         "filename": {{ ("_" + code_model.module_name) | tojson }},
-        "description": {{ code_model.description | tojson }}
+        "description": {{ code_model.description | tojson }},
+        "sync_imports": {{ str(sync_service_client_imports) | tojson }},
+        "async_imports": {{ str(async_service_client_imports) | tojson }}
     },
     "global_parameters": {
         "sync_method": {
@@ -39,7 +41,9 @@
     },
     "config": {
         "credential": {{ code_model.options['credential'] | tojson }},
-        "credential_scopes": {{ code_model.options['credential_scopes'] | tojson }}
+        "credential_scopes": {{ code_model.options['credential_scopes'] | tojson }},
+        "sync_imports": {{ str(sync_config_imports) | tojson }},
+        "async_imports": {{ str(async_config_imports) | tojson }}
     },
     "operation_groups": {
         {% for operation_group in code_model.operation_groups %}
@@ -49,8 +53,8 @@
         {% endfor %}
     },
     "operation_mixins": {
-        "sync_imports": {{ str(sync_parameter_imports) | tojson }},
-        "async_imports": {{ str(async_parameter_imports) | tojson }},
+        "sync_imports": {{ str(sync_operation_mixin_imports) | tojson }},
+        "async_imports": {{ str(async_operation_mixin_imports) | tojson }},
         "operations": {
             {% for operation in mixin_operations %}
             {{ operation.name | tojson }} : {

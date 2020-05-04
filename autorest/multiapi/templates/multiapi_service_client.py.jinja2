@@ -43,6 +43,12 @@ from azure.profiles import KnownProfiles, ProfileDefinition
 from azure.profiles.multiapiclient import MultiApiClientMixin
 from {{ config_import }} import {{ client_name }}Configuration
 {% if mixin_operations %}from {{ operations_mixin_import }} import {{ client_name }}OperationsMixin{% endif %}
+{% set imports = client["async_imports"] if async_mode else client["sync_imports"] %}
+{% if imports %}
+
+{{ imports }}
+{% endif %}
+
 
 class _SDKClient(object):
     def __init__(self, *args, **kwargs):
@@ -52,7 +58,7 @@ class _SDKClient(object):
         pass
 
 class {{ client_name }}({% if mixin_operations %}{{ client_name }}OperationsMixin, {% endif %}MultiApiClientMixin, _SDKClient):
-    """{{ client_doc }}
+    """{{ client["description"] }}
 
     This ready contains multiple API versions, to help you deal with all of the Azure clouds
     (Azure Stack, Azure Government, Azure China, etc.).
