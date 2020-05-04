@@ -1,12 +1,36 @@
 # Change Log
 
 ### Unreleased
+Modelerfour version: 4.12.301
+
+**Bug Fixes**
+
+- Fixing `AsyncTokenCredential` typing import and adding to service client  #591
+- Can now pass `content_type` and `error_map` kwargs to LRO functions without error  #597
+
+### 2020-04-23 - 5.0.0-preview.3
+Modelerfour version: 4.12.301
+
+**Bug Fixes**
+
+- Fixed sync lro method naming in MultiAPI operation mixins  #572
+
+### 2020-04-22 - 5.0.0-preview.2
+Modelerfour version: 4.12.301
 
 **New Features**
 
 - User can now pass in credential scopes through kwargs  #575
+- Default error map always contains a mapping of 404 to `ResourceNotFoundError` and 409 to `ResourceExistsError` #580
+
+**Bug Fixes**
+
+- Not generating async multiapi client if `--no-async` flag is specified  #586
+- Fixes query parameter handling in paging operations  #172
+- Fixes losing 404/409 default is user pass a user_map  #580
 
 ### 2020-04-16 - 5.0.0-preview.1
+Modelerfour version: 4.12.301
 
 **Breaking Changes**
 

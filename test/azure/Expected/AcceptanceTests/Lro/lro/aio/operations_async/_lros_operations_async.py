@@ -49,7 +49,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -120,6 +121,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -139,7 +143,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -208,6 +213,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -227,7 +235,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -296,6 +305,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -315,7 +327,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -389,6 +402,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -408,7 +424,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -477,6 +494,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -496,7 +516,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -570,6 +591,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -589,7 +613,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -658,6 +683,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -677,7 +705,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -748,6 +777,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -770,7 +802,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -843,6 +876,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -867,7 +903,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -939,6 +976,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -962,7 +1002,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -1035,6 +1076,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -1059,7 +1103,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -1131,6 +1176,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -1154,7 +1202,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -1225,6 +1274,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -1247,7 +1299,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Sku":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Sku"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -1316,6 +1369,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Sku', pipeline_response)
 
@@ -1335,7 +1391,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Sku":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Sku"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -1404,6 +1461,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Sku', pipeline_response)
 
@@ -1423,7 +1483,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.SubProduct":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.SubProduct"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         _product = models.SubProduct(provisioning_state=provisioning_state)
         content_type = kwargs.pop("content_type", "application/json")
@@ -1494,6 +1555,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('SubProduct', pipeline_response)
 
@@ -1513,7 +1577,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.SubProduct":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.SubProduct"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         _product = models.SubProduct(provisioning_state=provisioning_state)
         content_type = kwargs.pop("content_type", "application/json")
@@ -1584,6 +1649,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('SubProduct', pipeline_response)
 
@@ -1602,7 +1670,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_provisioning202_accepted200_succeeded_initial.metadata['url']  # type: ignore
@@ -1666,6 +1735,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -1688,7 +1760,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_provisioning202_deleting_failed200_initial.metadata['url']  # type: ignore
@@ -1752,6 +1825,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -1774,7 +1850,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_provisioning202_deletingcanceled200_initial.metadata['url']  # type: ignore
@@ -1838,6 +1915,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -1860,7 +1940,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete204_succeeded_initial.metadata['url']  # type: ignore
@@ -1912,6 +1993,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -1927,7 +2011,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete202_retry200_initial.metadata['url']  # type: ignore
@@ -1990,6 +2075,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -2008,7 +2096,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete202_no_retry204_initial.metadata['url']  # type: ignore
@@ -2071,6 +2160,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -2089,7 +2181,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_no_header_in_retry_initial.metadata['url']  # type: ignore
@@ -2145,6 +2238,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -2160,7 +2256,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_async_no_header_in_retry_initial.metadata['url']  # type: ignore
@@ -2216,6 +2313,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -2231,7 +2331,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_async_retry_succeeded_initial.metadata['url']  # type: ignore
@@ -2288,6 +2389,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -2303,7 +2407,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_async_no_retry_succeeded_initial.metadata['url']  # type: ignore
@@ -2360,6 +2465,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -2375,7 +2483,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_async_retry_failed_initial.metadata['url']  # type: ignore
@@ -2432,6 +2541,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -2447,7 +2559,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._delete_async_retrycanceled_initial.metadata['url']  # type: ignore
@@ -2504,6 +2617,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -2519,7 +2635,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Sku":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Sku"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._post200_with_payload_initial.metadata['url']  # type: ignore
@@ -2580,6 +2697,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Sku', pipeline_response)
 
@@ -2599,7 +2719,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -2668,6 +2789,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -2684,7 +2808,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -2756,6 +2881,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             response_headers = {}
             response = pipeline_response.http_response
@@ -2778,7 +2906,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._post_double_headers_final_location_get_initial.metadata['url']  # type: ignore
@@ -2834,6 +2963,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -2852,7 +2984,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._post_double_headers_final_azure_header_get_initial.metadata['url']  # type: ignore
@@ -2908,6 +3041,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -2926,7 +3062,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
 
         # Construct URL
         url = self._post_double_headers_final_azure_header_get_default_initial.metadata['url']  # type: ignore
@@ -2982,6 +3119,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -3001,7 +3141,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -3078,6 +3219,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -3097,7 +3241,8 @@ class LROsOperations:
         **kwargs
     ) -> "models.Product":
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Product"]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -3174,6 +3319,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             deserialized = self._deserialize('Product', pipeline_response)
 
@@ -3193,7 +3341,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -3263,6 +3412,9 @@ class LROsOperations:
             **kwargs
         )
 
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
+
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
@@ -3279,7 +3431,8 @@ class LROsOperations:
         **kwargs
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = kwargs.pop('error_map', {404: ResourceNotFoundError, 409: ResourceExistsError})
+        error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop('error_map', {}))
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -3348,6 +3501,9 @@ class LROsOperations:
             cls=lambda x,y,z: x,
             **kwargs
         )
+
+        kwargs.pop('error_map', None)
+        kwargs.pop('content_type', None)
 
         def get_long_running_output(pipeline_response):
             if cls:

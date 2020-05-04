@@ -10,7 +10,7 @@ import shutil
 
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional, cast
+from typing import Dict, List, Tuple, Optional, cast, Any
 from .multiapi_serializer import MultiAPISerializer
 from ..jsonrpc import AutorestAPI
 
@@ -24,10 +24,12 @@ class MultiApiScriptPlugin(Plugin):
         input_package_name: str = self._autorestapi.get_value("package-name")
         output_folder: str = self._autorestapi.get_value("output-folder")
         default_api: str = self._autorestapi.get_value("default-api")
+        no_async = self._autorestapi.get_boolean_value("no-async")
         generator = MultiAPI(
             input_package_name,
             output_folder,
             self._autorestapi,
+            no_async,
             default_api
         )
         return generator.process()
@@ -55,9 +57,10 @@ def _get_floating_latest(api_versions_list: List[str], preview_mode: bool) -> st
 
 def _build_last_rt_list(
     versioned_operations_dict: Dict[str, List[Tuple[str, str]]],
-    mixin_operations: Dict[str, Dict[str, List[str]]],
+    mixin_operations: Dict[str, Dict[str, Dict[str, Any]]],
     last_api_version: str,
-    preview_mode: bool
+    preview_mode: bool,
+    async_mode: bool
 ) -> Dict[str, str]:
     """Build the a mapping RT => API version if RT doesn't exist in latest detected API version.
 
@@ -90,16 +93,18 @@ def _build_last_rt_list(
 
     last_rt_list = {}
 
+    sync_or_async = "async" if async_mode else "sync"
+
     # Operation groups
     versioned_dict = {
-        operation_name: [meta[0] for meta in operation_metadata]
-        for operation_name, operation_metadata in versioned_operations_dict.items()
+        operation_group_name: [meta[0] for meta in operation_metadata]
+        for operation_group_name, operation_metadata in versioned_operations_dict.items()
     }
     # Operations at client level
     versioned_dict.update(
         {
-            operation_name: operation_metadata["available_apis"]
-            for operation_name, operation_metadata in mixin_operations["operations"].items()
+            operation_metadata[sync_or_async]["operation_name"]: operation_metadata[sync_or_async]["available_apis"]
+            for operation_metadata in mixin_operations.values()
         }
     )
     for operation, api_versions_list in versioned_dict.items():
@@ -124,6 +129,7 @@ class MultiAPI:
         input_package_name: str,
         output_folder: str,
         autorestapi: AutorestAPI,
+        no_async: Optional[bool] = False,
         default_api: Optional[str] = None
     ) -> None:
         if input_package_name is None:
@@ -134,6 +140,7 @@ class MultiAPI:
         self.output_folder = Path(output_folder).resolve()
         _LOGGER.debug("Received output-folder %s", output_folder)
         self.output_package_name: str = ""
+        self.no_async = no_async
         self._autorestapi = autorestapi
         self.default_api = default_api
 
@@ -145,7 +152,7 @@ class MultiAPI:
                 paths_to_versions.append(Path(child.stem))
         return paths_to_versions
 
-    def _build_operation_mixin_meta(self, paths_to_versions: List[Path]) -> Dict[str, Dict[str, List[str]]]:
+    def _build_operation_mixin_meta(self, paths_to_versions: List[Path]) -> Dict[str, Dict[str, Dict[str, Any]]]:
         """Introspect the client:
 
         version_dict => {
@@ -159,7 +166,7 @@ class MultiAPI:
             }
         }
         """
-        mixin_operations: Dict[str, Dict[str, List[str]]] = {}
+        mixin_operations: Dict[str, Dict[str, Dict[str, Any]]] = {}
         for version_path in paths_to_versions:
             metadata_json = json.loads(self._autorestapi.read_file(version_path / "_metadata.json"))
             if not metadata_json.get('operation_mixins'):
@@ -170,14 +177,29 @@ class MultiAPI:
             for func_name, func in operation_mixins_metadata["operations"].items():
                 if func_name.startswith("_"):
                     continue
-                mixin_operations.setdefault("operations", {}).setdefault(func_name, {}).setdefault(
+
+                mixin_operations.setdefault(func_name, {}).setdefault('sync', {})
+                mixin_operations.setdefault(func_name, {}).setdefault('async', {})
+                mixin_operations[func_name]['sync'].update({
+                    "signature": func['sync']['signature'],
+                    "operation_name": func['sync']['operation_name'],
+                    "doc": func['doc'],
+                    "call": func['call']
+                })
+                mixin_operations[func_name]['async'].update({
+                    "signature": func['async']['signature'],
+                    "operation_name": func['async']['operation_name'],
+                    "coroutine": func['async']['coroutine'],
+                    "doc": func['doc'],
+                    "call": func['call']
+                })
+                mixin_operations[func_name]['sync'].setdefault(
                     "available_apis", []
                 ).append(version_path.name)
-                mixin_operations["operations"][func_name]['doc'] = func['doc']
-                mixin_operations["operations"][func_name]['sync_signature'] = func['sync_signature']
-                mixin_operations["operations"][func_name]['async_signature'] = func['async_signature']
-                mixin_operations["operations"][func_name]['coroutine'] = func['coroutine']
-                mixin_operations["operations"][func_name]['call'] = func['call']
+                mixin_operations[func_name]['async'].setdefault(
+                    "available_apis", []
+                ).append(version_path.name)
+
 
         return mixin_operations
 
@@ -298,8 +320,11 @@ class MultiAPI:
         #    'check_dns_name_availability': '2018-05-01'
         # }
 
-        last_rt_list = _build_last_rt_list(
-            versioned_operations_dict, mixin_operations, last_api_version, preview_mode
+        last_rt_list_sync = _build_last_rt_list(
+            versioned_operations_dict, mixin_operations, last_api_version, preview_mode, async_mode=False
+        )
+        last_rt_list_async = _build_last_rt_list(
+            versioned_operations_dict, mixin_operations, last_api_version, preview_mode, async_mode=True
         )
 
         client_metadata = metadata_json["client"]
@@ -319,9 +344,10 @@ class MultiAPI:
             "mod_to_api_version": mod_to_api_version,
             "last_api_version": mod_to_api_version[last_api_version],
             "client_doc": metadata_json["client"]["description"],
-            "last_rt_list": last_rt_list,
+            "last_rt_list_sync": last_rt_list_sync,
+            "last_rt_list_async": last_rt_list_async,
             "default_models": sorted(
-                {last_api_version} | {versions for _, versions in last_rt_list.items()}
+                {last_api_version} | {versions for _, versions in last_rt_list_sync.items()}
             ),
             "config": metadata_json["config"],
             "global_parameters": metadata_json["global_parameters"]
@@ -335,13 +361,14 @@ class MultiAPI:
         )
         multiapi_serializer.serialize()
 
-        async_multiapi_serializer = MultiAPISerializer(
-            conf=conf,
-            async_mode=True,
-            autorestapi=self._autorestapi,
-            service_client_filename=metadata_json["client"]["filename"]
-        )
-        async_multiapi_serializer.serialize()
+        if not self.no_async:
+            async_multiapi_serializer = MultiAPISerializer(
+                conf=conf,
+                async_mode=True,
+                autorestapi=self._autorestapi,
+                service_client_filename=metadata_json["client"]["filename"]
+            )
+            async_multiapi_serializer.serialize()
 
 
         # don't erase patch file

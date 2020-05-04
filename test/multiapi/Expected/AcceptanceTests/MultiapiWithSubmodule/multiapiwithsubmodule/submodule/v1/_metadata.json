@@ -4,7 +4,9 @@
     "client": {
         "name": "MultiapiServiceClient",
         "filename": "_multiapi_service_client",
-        "description": "Service client for multiapi client testing."
+        "description": "Service client for multiapi client testing.",
+        "sync_imports": "from typing import TYPE_CHECKING\n\nfrom azure.core import PipelineClient\nfrom msrest import Deserializer, Serializer\n\nif TYPE_CHECKING:\n    # pylint: disable=unused-import,ungrouped-imports\n    from typing import Any",
+        "async_imports": "from typing import Any\n\nfrom azure.core import AsyncPipelineClient\nfrom msrest import Deserializer, Serializer"
     },
     "global_parameters": {
         "sync_method": {
@@ -29,36 +31,58 @@
     },
     "config": {
         "credential": true,
-        "credential_scopes": []
+        "credential_scopes": [],
+        "sync_imports": "from typing import TYPE_CHECKING\n\nfrom azure.core.configuration import Configuration\nfrom azure.core.pipeline import policies\n\nif TYPE_CHECKING:\n    # pylint: disable=unused-import,ungrouped-imports\n    from typing import Any\n\n    from azure.core.credentials_async import AsyncTokenCredential",
+        "async_imports": "from typing import Any, TYPE_CHECKING\n\nfrom azure.core.configuration import Configuration\nfrom azure.core.pipeline import policies\n\nif TYPE_CHECKING:\n    # pylint: disable=unused-import,ungrouped-imports\n    from azure.core.credentials_async import AsyncTokenCredential"
     },
     "operation_groups": {
         "operation_group_one": "OperationGroupOneOperations"
     },
     "operation_mixins": {
-        "sync_imports": "from typing import TYPE_CHECKING\n\nif TYPE_CHECKING:\n    # pylint: disable=unused-import,ungrouped-imports\n    from typing import Optional",
-        "async_imports": "from typing import Optional, TYPE_CHECKING",
-        "operations": {
-            "test_one" : {
-                "doc": "    \"\"\"TestOne should be in an FirstVersionOperationsMixin.\n\n:param id: An int parameter.\n:type id: int\n:param message: An optional string parameter.\n:type message: str\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: None or the result of cls(response)\n:rtype: None\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\"",
-                "sync_signature": "def test_one(\n    self,\n    id,  # type: int\n    message=None,  # type: Optional[str]\n    **kwargs  # type: Any\n):\n",
-                "async_signature": "async def test_one(\n    self,\n    id: int,\n    message: Optional[str] = None,\n    **kwargs\n) -\u003e None:\n",
-                "coroutine": true,
-                "call": "id, message"
+        "test_one" : {
+            "sync_imports": "",
+            "async_imports": "",
+            "sync": {
+                "operation_name": "test_one",
+                "signature": "def test_one(\n    self,\n    id,  # type: int\n    message=None,  # type: Optional[str]\n    **kwargs  # type: Any\n):\n"
             },
-            "_test_lro_initial" : {
-                "doc": "    \"\"\"\n\n:param product: Product to put.\n:type product: ~multiapiwithsubmodule.submodule.v1.models.Product\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: Product or the result of cls(response)\n:rtype: ~multiapiwithsubmodule.submodule.v1.models.Product or None\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\"",
-                "sync_signature": "def _test_lro_initial(\n    self,\n    product=None,  # type: Optional[\"models.Product\"]\n    **kwargs  # type: Any\n):\n",
-                "async_signature": "async def _test_lro_initial(\n    self,\n    product: Optional[\"models.Product\"] = None,\n    **kwargs\n) -\u003e \"models.Product\":\n",
-                "coroutine": true,
-                "call": "product"
+            "async": {
+                "operation_name": "test_one",
+                "signature": "async def test_one(\n    self,\n    id: int,\n    message: Optional[str] = None,\n    **kwargs\n) -\u003e None:\n",
+                "coroutine": true
             },
-            "test_lro" : {
-                "doc": "    \"\"\"Put in whatever shape of Product you want, will return a Product with id equal to 100.\n\n:param product: Product to put.\n:type product: ~multiapiwithsubmodule.submodule.v1.models.Product\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: Product or the result of cls(response)\n:rtype: ~multiapiwithsubmodule.submodule.v1.models.Product or None\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\"",
-                "sync_signature": "def begin_test_lro(\n    self,\n    product=None,  # type: Optional[\"models.Product\"]\n    **kwargs  # type: Any\n):\n",
-                "async_signature": "async def test_lro(\n    self,\n    product: Optional[\"models.Product\"] = None,\n    **kwargs\n) -\u003e \"models.Product\":\n",
-                "coroutine": true,
-                "call": "product"
-            }
+            "doc": "    \"\"\"TestOne should be in an FirstVersionOperationsMixin.\n\n:param id: An int parameter.\n:type id: int\n:param message: An optional string parameter.\n:type message: str\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: None or the result of cls(response)\n:rtype: None\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\"",
+            "call": "id, message"
+        },
+        "_test_lro_initial" : {
+            "sync_imports": "",
+            "async_imports": "",
+            "sync": {
+                "operation_name": "_test_lro_initial",
+                "signature": "def _test_lro_initial(\n    self,\n    product=None,  # type: Optional[\"models.Product\"]\n    **kwargs  # type: Any\n):\n"
+            },
+            "async": {
+                "operation_name": "_test_lro_initial",
+                "signature": "async def _test_lro_initial(\n    self,\n    product: Optional[\"models.Product\"] = None,\n    **kwargs\n) -\u003e \"models.Product\":\n",
+                "coroutine": true
+            },
+            "doc": "    \"\"\"\n\n:param product: Product to put.\n:type product: ~multiapiwithsubmodule.submodule.v1.models.Product\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: Product or the result of cls(response)\n:rtype: ~multiapiwithsubmodule.submodule.v1.models.Product or None\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\"",
+            "call": "product"
+        },
+        "test_lro" : {
+            "sync_imports": "",
+            "async_imports": "",
+            "sync": {
+                "operation_name": "begin_test_lro",
+                "signature": "def begin_test_lro(\n    self,\n    product=None,  # type: Optional[\"models.Product\"]\n    **kwargs  # type: Any\n):\n"
+            },
+            "async": {
+                "operation_name": "test_lro",
+                "signature": "async def test_lro(\n    self,\n    product: Optional[\"models.Product\"] = None,\n    **kwargs\n) -\u003e \"models.Product\":\n",
+                "coroutine": true
+            },
+            "doc": "    \"\"\"Put in whatever shape of Product you want, will return a Product with id equal to 100.\n\n:param product: Product to put.\n:type product: ~multiapiwithsubmodule.submodule.v1.models.Product\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: Product or the result of cls(response)\n:rtype: ~multiapiwithsubmodule.submodule.v1.models.Product or None\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\"",
+            "call": "product"
         }
     }
 }

@@ -4,7 +4,9 @@
     "client": {
         "name": "MultiapiServiceClient",
         "filename": "_multiapi_service_client",
-        "description": "Service client for multiapi client testing."
+        "description": "Service client for multiapi client testing.",
+        "sync_imports": "from typing import TYPE_CHECKING\n\nfrom azure.core import PipelineClient\nfrom msrest import Deserializer, Serializer\n\nif TYPE_CHECKING:\n    # pylint: disable=unused-import,ungrouped-imports\n    from typing import Any",
+        "async_imports": "from typing import Any\n\nfrom azure.core import AsyncPipelineClient\nfrom msrest import Deserializer, Serializer"
     },
     "global_parameters": {
         "sync_method": {
@@ -29,23 +31,29 @@
     },
     "config": {
         "credential": true,
-        "credential_scopes": []
+        "credential_scopes": [],
+        "sync_imports": "from typing import TYPE_CHECKING\n\nfrom azure.core.configuration import Configuration\nfrom azure.core.pipeline import policies\n\nif TYPE_CHECKING:\n    # pylint: disable=unused-import,ungrouped-imports\n    from typing import Any\n\n    from azure.core.credentials_async import AsyncTokenCredential",
+        "async_imports": "from typing import Any, TYPE_CHECKING\n\nfrom azure.core.configuration import Configuration\nfrom azure.core.pipeline import policies\n\nif TYPE_CHECKING:\n    # pylint: disable=unused-import,ungrouped-imports\n    from azure.core.credentials_async import AsyncTokenCredential"
     },
     "operation_groups": {
         "operation_group_one": "OperationGroupOneOperations",
         "operation_group_two": "OperationGroupTwoOperations"
     },
     "operation_mixins": {
-        "sync_imports": "from typing import TYPE_CHECKING\n\nif TYPE_CHECKING:\n    # pylint: disable=unused-import,ungrouped-imports\n    from typing import Optional, Union",
-        "async_imports": "from typing import Optional, TYPE_CHECKING, Union",
-        "operations": {
-            "test_paging" : {
-                "doc": "    \"\"\"Returns ModelThree with optionalProperty \u0027paged\u0027.\n\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: PagingResult or the result of cls(response)\n:rtype: ~multiapiwithsubmodule.submodule.v3.models.PagingResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\"",
-                "sync_signature": "def test_paging(\n    self,\n    **kwargs  # type: Any\n):\n",
-                "async_signature": "def test_paging(\n    self,\n    **kwargs\n) -\u003e \"models.PagingResult\":\n",
-                "coroutine": false,
-                "call": ""
-            }
+        "test_paging" : {
+            "sync_imports": "",
+            "async_imports": "",
+            "sync": {
+                "operation_name": "test_paging",
+                "signature": "def test_paging(\n    self,\n    **kwargs  # type: Any\n):\n"
+            },
+            "async": {
+                "operation_name": "test_paging",
+                "signature": "def test_paging(\n    self,\n    **kwargs\n) -\u003e AsyncItemPaged[\"models.PagingResult\"]:\n",
+                "coroutine": false
+            },
+            "doc": "    \"\"\"Returns ModelThree with optionalProperty \u0027paged\u0027.\n\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: PagingResult or the result of cls(response)\n:rtype: ~multiapiwithsubmodule.submodule.v3.models.PagingResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\"",
+            "call": ""
         }
     }
 }

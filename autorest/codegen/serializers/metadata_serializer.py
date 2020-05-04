@@ -15,8 +15,7 @@ from ..models import (
     CredentialSchema,
     ParameterList
 )
-from ..models.imports import FileImport
-from .import_serializer import FileImportSerializer
+from .import_serializer import FileImportSerializer, FileImport
 from .general_serializer import config_imports, service_client_imports
 
 def _correct_credential_parameter(global_parameters: ParameterList, async_mode: bool) -> None:
@@ -104,8 +103,12 @@ class MetadataSerializer:
             None
         )
         mixin_operations: List[Operation] = []
+        sync_mixin_imports = None
+        async_mixin_imports = None
         if mixin_operation_group:
             mixin_operations = mixin_operation_group.operations
+            sync_mixin_imports = mixin_operation_group.imports(async_mode=False, has_schemas=False)
+            async_mixin_imports = mixin_operation_group.imports(async_mode=True, has_schemas=False)
         chosen_version, total_api_version_list = self._choose_api_version()
 
         imports_dict = self._get_imports_dict()
